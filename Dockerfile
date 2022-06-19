@@ -19,7 +19,7 @@ ENV GOJQ_URL https://github.com/itchyny/gojq/releases/download/$GOJQ_VERSION/${G
 
 RUN go install github.com/itchyny/gojq/cmd/gojq@latest
 
-RUN cleanimage
+RUN /usr/local/bin/cleanimage
 
 COPY ["entrypoint.sh", "/entrypoint.sh"]
 ENTRYPOINT ["/entrypoint.sh"]
