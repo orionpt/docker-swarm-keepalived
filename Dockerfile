@@ -1,4 +1,4 @@
-FROM golang:1.18.3-alpine3.16
+FROM golang:1.18.3-bullseye
 
 COPY ["cleanimage", "/usr/local/bin/cleanimage"]
 RUN chmod +x "/usr/local/bin/cleanimage"
@@ -19,7 +19,7 @@ ENV GOJQ_URL https://github.com/itchyny/gojq/releases/download/$GOJQ_VERSION/${G
 
 RUN go install github.com/itchyny/gojq/cmd/gojq@latest
 
-RUN /usr/local/bin/cleanimage
+RUN cleanimage
 
 COPY ["entrypoint.sh", "/entrypoint.sh"]
 ENTRYPOINT ["/entrypoint.sh"]
