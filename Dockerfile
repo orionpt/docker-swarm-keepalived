@@ -10,8 +10,8 @@ ENV GOJQ_URL https://github.com/itchyny/gojq/releases/download/$GOJQ_VERSION/${G
 # ADD ["$CLEANIMAGE_URL", "/usr/local/bin/"]
 # RUN chmod +x "/usr/local/bin/cleanimage"
 
-RUN apk -update add curl \
-                    go-lang
+RUN apk -update add curl
+RUN apk -update add go-lang
 # && curl -sSfL -- "$GOJQ_URL" | tar -xzf - \
 # && mv "$GOJQ_FILE/gojq" /usr/bin/jq \
 # && rm -Rf "$GOJQ_FILE" \
