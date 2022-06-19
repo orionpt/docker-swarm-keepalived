@@ -1,9 +1,8 @@
-FROM alpine:3.16.0
+FROM debian:bullseye-slim
 
-RUN apk add --update --no-cache jq \
-                                docker \
-                                openrc
-RUN rc-update add docker boot
+RUN apt-get update \
+ && apt-get install -y jq \
+                       docker
 
 COPY ["cleanimage", "/usr/local/bin/cleanimage"]
 RUN chmod +x "/usr/local/bin/cleanimage"
