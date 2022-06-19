@@ -1,28 +1,13 @@
-FROM golang:1.18.3-bullseye
+FROM alpine:3.16.0
 
 COPY ["cleanimage", "/usr/local/bin/cleanimage"]
 RUN chmod +x "/usr/local/bin/cleanimage"
 
-ENV GOJQ_VERSION v0.12.8
-ENV GOJQ_FILE gojq_${GOJQ_VERSION}_linux_arm64
-ENV GOJQ_URL https://github.com/itchyny/gojq/releases/download/$GOJQ_VERSION/${GOJQ_FILE}.tar.gz
-
-# ADD ["$CLEANIMAGE_URL", "/usr/local/bin/"]
-# RUN chmod +x "/usr/local/bin/cleanimage"
-
-# && curl -sSfL -- "$CLEANIMAGE_URL" > "/usr/local/bin/cleanimage" \
-# && chmod +x "/usr/local/bin/cleanimage"
-# && curl -sSfL -- "$GOJQ_URL" | tar -xzf - \
-# && mv "$GOJQ_FILE/gojq" /usr/bin/jq \
-# && rm -Rf "$GOJQ_FILE" \
-# && cleanimage
-
-RUN go install github.com/itchyny/gojq/cmd/gojq@latest
+RUN apk -update add jq
 
 RUN cleanimage
 
 COPY ["entrypoint.sh", "/entrypoint.sh"]
-#ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
 
-#CMD ["orionpt/keepalived:stable"]
-CMD /bin/bash
+CMD ["orionpt/keepalived:stable"]
