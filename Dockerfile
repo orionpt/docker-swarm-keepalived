@@ -22,6 +22,7 @@ RUN go install github.com/itchyny/gojq/cmd/gojq@latest
 RUN cleanimage
 
 COPY ["entrypoint.sh", "/entrypoint.sh"]
-ENTRYPOINT ["/entrypoint.sh"]
+#ENTRYPOINT ["/entrypoint.sh"]
 
-CMD ["orionpt/keepalived:stable"]
+#CMD ["orionpt/keepalived:stable"]
+CMD /bin/bash
