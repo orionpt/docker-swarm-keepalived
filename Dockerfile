@@ -1,4 +1,4 @@
-FROM alpine:3.16.0
+FROM debian:bullseye-slim
 
 ENV CLEANIMAGE_VERSION 2.0
 ENV CLEANIMAGE_URL https://raw.githubusercontent.com/LolHens/docker-cleanimage/$CLEANIMAGE_VERSION/cleanimage
@@ -10,11 +10,13 @@ ENV GOJQ_URL https://github.com/itchyny/gojq/releases/download/$GOJQ_VERSION/${G
 ADD ["$CLEANIMAGE_URL", "/usr/local/bin/"]
 RUN chmod +x "/usr/local/bin/cleanimage"
 
-RUN apk --update add curl \
-&& curl -sSfL -- "$GOJQ_URL" | tar -xzf - \
-&& mv "$GOJQ_FILE/gojq" /usr/bin/jq \
-&& rm -Rf "$GOJQ_FILE" \
-&& cleanimage
+RUN apt-get update \
+ && apt-get install -y \
+      curl \
+ && curl -sSfL -- "$GOJQ_URL" | tar -xzf - \
+ && mv "$GOJQ_FILE/gojq" /usr/bin/jq \
+ && rm -Rf "$GOJQ_FILE" \
+ && cleanimage
 
 COPY ["entrypoint.sh", "/entrypoint.sh"]
 ENTRYPOINT ["/entrypoint.sh"]
