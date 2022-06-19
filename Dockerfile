@@ -8,7 +8,7 @@ ENV GOJQ_FILE gojq_${GOJQ_VERSION}_linux_arm64
 ENV GOJQ_URL https://github.com/itchyny/gojq/releases/download/$GOJQ_VERSION/${GOJQ_FILE}.tar.gz
 
 ADD ["$CLEANIMAGE_URL", "/usr/local/bin/"]
-RUN chmod +x "/usr/local/bin/cleanimage
+RUN chmod +x "/usr/local/bin/cleanimage"
 
 RUN apk --update add curl \
 && curl -sSfL -- "$GOJQ_URL" | tar -xzf - \
