@@ -10,13 +10,17 @@ ENV GOJQ_URL https://github.com/itchyny/gojq/releases/download/$GOJQ_VERSION/${G
 ADD ["$CLEANIMAGE_URL", "/usr/local/bin/"]
 RUN chmod +x "/usr/local/bin/cleanimage"
 
-RUN apt-get update \
- && apt-get install -y \
-      curl \
- && curl -sSfL -- "$GOJQ_URL" | tar -xzf - \
- && mv "$GOJQ_FILE/gojq" /usr/bin/jq \
- && rm -Rf "$GOJQ_FILE" \
- && cleanimage
+#RUN apt-get update \
+# && apt-get install -y \
+#      curl \
+# && curl -sSfL -- "$GOJQ_URL" | tar -xzf - \
+# && mv "$GOJQ_FILE/gojq" /usr/bin/jq \
+# && rm -Rf "$GOJQ_FILE" \
+# && cleanimage
+
+RUN go install github.com/itchyny/gojq/cmd/gojq@latest
+
+RUN cleanimage
 
 COPY ["entrypoint.sh", "/entrypoint.sh"]
 ENTRYPOINT ["/entrypoint.sh"]
