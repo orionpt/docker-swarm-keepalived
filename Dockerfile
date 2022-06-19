@@ -11,7 +11,7 @@ ENV GOJQ_URL https://github.com/itchyny/gojq/releases/download/$GOJQ_VERSION/${G
 # RUN chmod +x "/usr/local/bin/cleanimage"
 
 RUN apk -update add curl \
-                    go
+                    go \
 # && curl -sSfL -- "$GOJQ_URL" | tar -xzf - \
 # && mv "$GOJQ_FILE/gojq" /usr/bin/jq \
 # && rm -Rf "$GOJQ_FILE" \
