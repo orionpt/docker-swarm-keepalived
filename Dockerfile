@@ -1,4 +1,4 @@
-FROM debian:bullseye-slim
+FROM alpine:3.16.0
 
 ENV CLEANIMAGE_VERSION 2.0
 ENV CLEANIMAGE_URL https://raw.githubusercontent.com/LolHens/docker-cleanimage/$CLEANIMAGE_VERSION/cleanimage
