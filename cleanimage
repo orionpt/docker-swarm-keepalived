@@ -1,6 +1,17 @@
-#!/bin/sh
+#!/bin/bash
 
 echo "Cleaning image..."
+
+if hash apt-get 2>/dev/null
+then
+  apt-get -y --purge autoremove
+  apt-get -y clean
+fi
+
+if hash yum 2>/dev/null
+then
+  yum clean all
+fi
 
 rm -Rf \
   /tmp/* \
